@@ -3,7 +3,7 @@ In this exercise you will have build a responsive site navigation with a simple 
 
 ## Here are the guidelines for this exercise
 * It must be developed using only css (you can use less, sass...), javascript, HTML 5 & PHP.
-* No frameworks or libraries (e.g. Bootstrap, jQuery, Angular, React...).
+* No frameworks or libraries (e.g. Bootstrap, jQuery, Angular, React, CodeIgniter, Laravel...).
 * Nav menu must be responsive.
 * Items in nav menu should be load using javascript getting the json object in **"resources/data/menu.js"** via http request.
 * An user can log in and log out using php sessions.
