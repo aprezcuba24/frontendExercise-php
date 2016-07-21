@@ -1,48 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test Rockalabs</title>
-    <link rel="stylesheet" type="text/css" href="css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
-<body>
-<div id="covermask" onclick="closeSideBar()"></div>
-<div id="side-menu">
-    <div class="header-menu">
-        Menú
-        <img onclick="closeSideBar()" src="/resources/assets/close.png" alt="">
-    </div>
-    <?php include 'menu.php'?>
-    <div class="footer-menu">
-        @2015 Nuevotalento
-    </div>
-</div>
-<div id="all-container">
-    <header>
-        <img id="logo" src="resources/assets/logo.png" alt="">
-        <img onclick="openSideBar()" id="menu-open" src="/resources/assets/menu.png" alt="">
-        <div id="top-menu">
-            <?php include 'menu.php'?>
-        </div>
-        <div class="clearfix"></div>
-    </header>
-    <section>
-        contenido
-    </section>
-</div>
+<?php
+ini_set('display_errors', 'On');
+ini_set('display_errors', 1);
 
-<style type="text/css">
-    .check:checked + div {
-        display: none;
-    }
-</style>
-<div>
-    <input class="check" type="checkbox">
-    <div>AAAA</div>
-</div>
+require_once 'autoload.php';
 
-<script src="js/main.js"></script>
-</body>
-</html>
+$di = new \Core\DIContainer();
+$di->add(\Core\Contracts\TemplateRenderInterface::class, function () {
+    return new \Core\TemplateRender('layout', __DIR__.'/Templates');
+});
+$di->add(\Core\Contracts\RouterInterface::class, function (\Core\Contracts\DIContainerInterface $di) {
+    return new \Core\Router($di);
+});
+
+$router = $di->get(\Core\Contracts\RouterInterface::class);
+
+require_once 'routes.php';
+
+$request = \Core\Request::createRequest();
+
+$response = $router->execute($request);
+
+echo $response;
