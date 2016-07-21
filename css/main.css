@@ -205,6 +205,9 @@ header {
 }
 
 @media (max-width: 767px) {
+    body {
+        background-size: 960px;
+    }
     #menu-open {
         display: block;
     }
