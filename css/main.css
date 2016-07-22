@@ -20,6 +20,7 @@
 body {
     background: url("/resources/assets/background.jpg") no-repeat center 0px;
     font-family: 'Roboto-regular';
+    color: white;
 }
 header {
     background-color: rgba(0,0,0,0.5);
@@ -202,6 +203,79 @@ header {
     z-index: 10;
     opacity: 0.5;
     display: none;
+}
+
+#container-content {
+    padding: 30px;
+}
+#slogan {
+    float: left;
+}
+#box {
+    float: right;
+    border-radius: 2px;
+    border-top: 4px solid #f29100;
+    width: 330px;
+    height: 411px;
+}
+#box .container {
+    padding: 20px;
+}
+#box h3 {
+    margin-top: 0;
+}
+#box .background {
+    width: 330px;
+    height: 411px;
+    z-index: -10;
+    position: absolute;
+    background-color: #cecdcd;
+    opacity: 0.5;
+    border-radius: 2px;
+}
+#box .linkedin, #box .facebook {
+    width: 100%;
+    height: 45px;
+    color: white;
+    border: 0;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+}
+#box .linkedin {
+    background: url("../resources/assets/Linkedin.png") #008bc2 no-repeat 5px;
+}
+#box .facebook {
+    background: url("../resources/assets/facebook.png") #4b6eaa no-repeat 5px;
+}
+#box .or {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#box input {
+    width: 91.5%;
+    border-radius: 5px;
+    border: 1px solid #9d9d9c;
+    padding: 10px 10px 10px 15px;
+    margin-bottom: 20px;
+}
+#box .register {
+    width: 100%;
+    background-color: #f29100;
+    border: 1px solid #f07100;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
+#box.internal {
+    text-align: center;
+}
+#box.internal h3 {
+    color: black;
 }
 
 @media (max-width: 767px) {

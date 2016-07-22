@@ -21,7 +21,9 @@
 </div>
 <div id="all-container">
     <header>
-        <img id="logo" src="/resources/assets/logo.png" alt="">
+        <a href="/index.php">
+            <img id="logo" src="/resources/assets/logo.png" alt="">
+        </a>
         <img onclick="openSideBar()" id="menu-open" src="/resources/assets/menu.png" alt="">
         <div id="top-menu">
             <?php include 'menu.php'?>
@@ -29,7 +31,9 @@
         <div class="clearfix"></div>
     </header>
     <section>
-        <?php echo $content?>
+        <div id="container-content">
+            <?php echo $content?>
+        </div>
     </section>
 </div>
 <script src="/js/main.js"></script>
