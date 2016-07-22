@@ -32,10 +32,10 @@ class TemplateRender implements TemplateRenderInterface
     {
         ob_start();
         extract($params);
-        echo include $this->viewDir.'/'.$template.'.php';
+        include $this->viewDir.'/'.$template.'.php';
 
         $content = ob_get_contents();
-        ob_clean();
+        @ob_end_clean();
 
         return $content;
     }
