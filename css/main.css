@@ -212,7 +212,6 @@ header {
     float: left;
 }
 #box {
-    float: right;
     border-radius: 2px;
     border-top: 4px solid #f29100;
     width: 330px;
@@ -273,6 +272,10 @@ header {
 }
 #box.internal {
     text-align: center;
+    margin: 0 auto;
+}
+#box.login {
+    float: right;
 }
 #box.internal h3 {
     color: black;

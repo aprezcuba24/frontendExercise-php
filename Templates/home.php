@@ -3,7 +3,7 @@
     <h2>Tu mejor empleo te está esperando</h2>
 </div>
 <?php if (!isAuth()):?>
-<div id="box">
+<div id="box" class="login">
     <div class="background"></div>
     <div class="container">
         <h3>Registrate</h3>
