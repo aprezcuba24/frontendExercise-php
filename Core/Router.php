@@ -88,11 +88,8 @@ class Router implements RouterInterface
 
     public function redirect($uri)
     {
-        //Despues ver bien como se debe formar la url
-//        if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
-            $uri = 'index.php'.$uri;
-//        }
-        
+        $uri = '/index.php'.$uri;
+
         return new Response('', 302, [
             'Location' => $uri,
         ]);
