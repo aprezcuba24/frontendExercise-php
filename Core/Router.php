@@ -11,8 +11,10 @@ use Core\Contracts\RouterInterface;
 
 class Router implements RouterInterface
 {
-    protected $gets  = [];
-    protected $posts = [];
+    protected $gets   = [];
+    protected $posts  = [];
+    protected $after  = [];
+    protected $before = [];
     protected $di;
 
     public function __construct(DIContainerInterface $di)
@@ -20,20 +22,36 @@ class Router implements RouterInterface
         $this->di = $di;
     }
 
-    public function get($uri, $callback)
+    public function get($uri, $callback, $filters = [])
     {
-        $this->gets[$uri] = $callback;
+        $this->gets[$uri] = [
+            'callback' => $callback,
+            'filters'  => $filters,
+        ];
     }
 
-    public function post($uri, $callback)
+    public function post($uri, $callback, $filters = [])
     {
-        $this->posts[$uri] = $callback;
+        $this->posts[$uri] = [
+            'callback' => $callback,
+            'filters'  => $filters,
+        ];
     }
 
-    public function any($uri, $callback)
+    public function any($uri, $callback, $filters = [])
     {
-        $this->get($uri, $callback);
-        $this->posts($uri, $callback);
+        $this->get($uri, $callback, $filters);
+        $this->post($uri, $callback, $filters);
+    }
+
+    public function addAfter($name, $callback)
+    {
+        $this->after[$name] = $callback;
+    }
+
+    public function addBefore($name, $callback)
+    {
+        $this->before[$name] = $callback;
     }
 
     public function execute(Request $request)
@@ -46,18 +64,37 @@ class Router implements RouterInterface
         if (!isset($handlers[$uri])) {
             return new Response($uri, 404);
         }
-        $result = $this->di->resolve($handlers[$uri]);
-        if ($result instanceof Response) {
-            return $result;
+        $filters = $handlers[$uri]['filters'];
+        if (isset($filters['after'])) {
+            foreach ($filters['after'] as $filterName) {
+                if (!isset($this->after[$filterName])) {
+                    throw new \InvalidArgumentException('No existe un filtro after con ese nombre.');
+                }
+                $result = $this->di->resolve($this->after[$filterName]);
+                if ($result instanceof Response) {
+                    return $result;
+                }
+            }
         }
+        $callback = $handlers[$uri]['callback'];
+        $result = $this->di->resolve($callback);
+        if (!$result instanceof Response) {
+            $result = new Response($result);
+        }
+        //Aqui se debe implementar despues los filtros before
 
-        return new Response($result);
+        return $result;
     }
 
     public function redirect($uri)
     {
+        //Despues ver bien como se debe formar la url
+//        if (strpos($_SERVER['REQUEST_URI'], 'index.php') === false) {
+            $uri = 'index.php'.$uri;
+//        }
+        
         return new Response('', 302, [
-            'Location' => 'index.php'.$uri,
+            'Location' => $uri,
         ]);
     }
 }

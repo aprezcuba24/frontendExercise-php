@@ -32,17 +32,6 @@
         <?php echo $content?>
     </section>
 </div>
-
-<style type="text/css">
-    .check:checked + div {
-        display: none;
-    }
-</style>
-<div>
-    <input class="check" type="checkbox">
-    <div>AAAA</div>
-</div>
-
 <script src="/js/main.js"></script>
 </body>
 </html>
